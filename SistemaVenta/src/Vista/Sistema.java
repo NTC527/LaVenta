@@ -5,16 +5,19 @@
  */
 package Vista;
 
+import Modelo.Cliente;
+import Modelo.ClienteDao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
  */
 public class Sistema extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Sistema
-     */
+    Cliente cl = new Cliente();
+    ClienteDao client = new ClienteDao();
     public Sistema() {
+        this.cl = new Cliente();
         initComponents();
     }
 
@@ -236,6 +239,11 @@ public class Sistema extends javax.swing.JFrame {
         }
 
         btnGuardarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/GuardarTodo.png"))); // NOI18N
+        btnGuardarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarClienteActionPerformed(evt);
+            }
+        });
 
         btnEditarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Actualizar (2).png"))); // NOI18N
 
@@ -872,6 +880,19 @@ public class Sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField24ActionPerformed
 
+    private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
+        if (!"".equals(txtDniCliente.getText()) || !"".equals(txtNombreCliente.getText()) || !"".equals(txtTelefonoCliente.getText()) || !"".equals(txtDireccionCliente.getText())) {
+        cl.setDni(Integer.parseInt(txtDniCliente.getText()));
+        cl.setNombre(txtNombreCliente.getText());
+        cl.setTelefono(Integer.parseInt(txtTelefonoCliente.getText()));
+        cl.setDireccion(txtDireccionCliente.getText());
+        cl.setRazon(txtRazonCliente.getText());
+        client.RegistrarCliente(cl);
+            JOptionPane.showMessageDialog(null, "CLiente Registrado");
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+    }//GEN-LAST:event_btnGuardarClienteActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
