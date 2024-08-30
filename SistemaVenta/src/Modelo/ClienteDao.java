@@ -4,8 +4,8 @@ package Modelo;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
+
 
 
 public class ClienteDao {
@@ -17,24 +17,18 @@ public class ClienteDao {
     public boolean RegistrarCliente(Cliente c1){
         
         public List ListarCliente(){
-            List<Cliente> ListaC1= new ArrayList();
-            String sql = "SELECT * FROM clientes";
-        try{
-            con = cn.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()){
-                Cliente c1 = new Cliente();
-                ps.setInt(1, c1.getDni());
-                ps.setString(2, c1.getNombre());
-                ps.setInt(3, c1.getTelefono());
-                ps.setString(4, c1.getDireccion());
-                ps.setString(5, c1.getRazon());
-                ps.execute();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-            }
-        return ListaC1;
+            List<Cliente> ListaC1= client.ListarCliente();
+            modelo = (DefaultTableModel) TableCliente.getModel();
+            Object[] ob = new Object[6];  
+        for(int i = 0; i < ListarC1.size(); i++){
+            ob[0] = ListarCl.get(i).getId();
+            ob[1] = ListarCl.get(i).getDni();
+            ob[2] = ListarCl.get(i).getNombre();
+            ob[3] = ListarCl.get(i).getTelefono();
+            ob[4] = ListarCl.get(i).getDireccion();
+            ob[5] = ListarCl.get(i).getRazon();
+            modelo.addRow(ob);
+        }
+        TableCliente.setModel(modelo);
         }
 }
