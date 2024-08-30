@@ -16,9 +16,14 @@ import javax.swing.JOptionPane;
 public class Sistema extends javax.swing.JFrame {
     Cliente cl = new Cliente();
     ClienteDao client = new ClienteDao();
+    DefaultTableModel modelo;
     public Sistema() {
-        this.cl = new Cliente();
         initComponents();
+    }
+    
+    public void ListarCliente(){
+        List<Cliente> ListaC1= new ArrayList();
+            String sql = "SELECT * FROM clientes";
     }
 
     /**
