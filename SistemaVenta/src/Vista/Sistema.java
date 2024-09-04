@@ -7,7 +7,7 @@ package Vista;
 
 import Modelo.Cliente;
 import Modelo.ClienteDao;
-import javax.swing.JOptionPane;
+import java.awt.List;
 
 /**
  *
@@ -22,8 +22,20 @@ public class Sistema extends javax.swing.JFrame {
     }
     
     public void ListarCliente(){
-        List<Cliente> ListaC1= new ArrayList();
-            String sql = "SELECT * FROM clientes";
+        List<Cliente> ListarC1 = client.ListarCliente();
+        modelo - (DefaultTableModel) TableCliente.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i < ListarC1.size(); i++) {
+            ob[0] = ListarC1.get(i).getId();
+            ob[1] = ListarC1.get(i).getDni();
+            ob[2] = ListarC1.get(i).getNombre();
+            ob[3] = ListarC1.get(i).getTelefono();
+            ob[4] = ListarC1.get(i).getDireccion();
+            ob[5] = ListarC1.get(i).getRazon();
+            modelo.addRow(ob);
+        }
+        TableCliente.setModel(modelo);
+          
     }
 
     /**
@@ -154,6 +166,11 @@ public class Sistema extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Clientes.png"))); // NOI18N
         jButton2.setText("Clientes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/proveedor.png"))); // NOI18N
         jButton3.setText("Proveedor");
@@ -897,6 +914,10 @@ public class Sistema extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
     }
     /**
      * @param args the command line arguments
