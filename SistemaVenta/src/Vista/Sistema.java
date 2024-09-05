@@ -910,13 +910,16 @@ public class Sistema extends javax.swing.JFrame {
         cl.setDireccion(txtDireccionCliente.getText());
         cl.setRazon(txtRazonCliente.getText());
         client.RegistrarCliente(cl);
-            JOptionPane.showMessageDialog(null, "CLiente Registrado");
+            JOptionPane.showMessageDialog(null, "Cliente Registrado");
         }else{
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
-
+    }
+        
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        ListarCliente();
+        jTabbedPanel.setSelectedIndex(i);
     }//GEN-LAST:event_jButton2ActionPerformed
     }
     /**
