@@ -18,17 +18,24 @@ public class ClienteDao {
         
         public List ListarCliente(){
             List<Cliente> ListaC1= client.ListarCliente();
-            modelo = (DefaultTableModel) TableCliente.getModel();
-            Object[] ob = new Object[6];  
-        for(int i = 0; i < ListarC1.size(); i++){
-            ob[0] = ListarCl.get(i).getId();
-            ob[1] = ListarCl.get(i).getDni();
-            ob[2] = ListarCl.get(i).getNombre();
-            ob[3] = ListarCl.get(i).getTelefono();
-            ob[4] = ListarCl.get(i).getDireccion();
-            ob[5] = ListarCl.get(i).getRazon();
-            modelo.addRow(ob);
+            String sql = "SELECT * FROM clientes"; 
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+        while (rs.next()){
+            Cliente cl = new Cliente();
+        cl.setId(rs.getInt("id"));
+        cl.setDni(rs.getInt("dni"));
+        cl.setNombre(rs.getString("nombre"));
+        cl.setTelefono(rs.getInt("telefono"));
+        cl.setDireccion(rs.getString("direccion"));
+        cl.setRazon(rs.getString("razon"));
+        ListarCl.add(cl)
         }
-        TableCliente.setModel(modelo);
+        } catch (SQLException e){
+            System.out.println(e.toString()); 
+        }
+        return Listar Cl;
         }
 }
