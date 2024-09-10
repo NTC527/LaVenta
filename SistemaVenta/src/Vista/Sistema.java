@@ -8,36 +8,44 @@ package Vista;
 import Modelo.Cliente;
 import Modelo.ClienteDao;
 import java.awt.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ASUS
  */
 public class Sistema extends javax.swing.JFrame {
+    
     Cliente cl = new Cliente();
     ClienteDao client = new ClienteDao();
-    DefaultTableModel modelo;
+    DefaultTableModel modelo = new DefaultTableModel();
     public Sistema() {
         initComponents();
-    }
-    
+    }   
     public void ListarCliente(){
-        List<Cliente> ListarC1 = client.ListarCliente();
-        modelo - (DefaultTableModel) TableCliente.getModel();
+        List<Cliente> ListarCl = client.ListarCliente();
+        modelo = (DefaultTableModel) TableCliente.getModel();
         Object[] ob = new Object[6];
-        for (int i = 0; i < ListarC1.size(); i++) {
-            ob[0] = ListarC1.get(i).getId();
-            ob[1] = ListarC1.get(i).getDni();
-            ob[2] = ListarC1.get(i).getNombre();
-            ob[3] = ListarC1.get(i).getTelefono();
-            ob[4] = ListarC1.get(i).getDireccion();
-            ob[5] = ListarC1.get(i).getRazon();
+        for (int i = 0; i < ListarCl.size(); i++) {
+            ob[0] = ListarCl.get(i).getId();
+            ob[1] = ListarCl.get(i).getDni();
+            ob[2] = ListarCl.get(i).getNombre();
+            ob[3] = ListarCl.get(i).getTelefono();
+            ob[4] = ListarCl.get(i).getDireccion();
+            ob[5] = ListarCl.get(i).getRazon();
             modelo.addRow(ob);
         }
         TableCliente.setModel(modelo);
           
     }
 
+    public void LimpiarTable(){
+        for (int i = 0; i < modelo.getRowCount(); i++){
+            modelo.removeRow(i);
+            i = i-1;
+    }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -914,15 +922,16 @@ public class Sistema extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
-    }
-        
+    
+    }  
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         LimpiarTable();
         ListarCliente();
         jTabbedPanel.setSelectedIndex(i);
     }//GEN-LAST:event_jButton2ActionPerformed
-    }
+    
     /**
      * @param args the command line arguments
      */
