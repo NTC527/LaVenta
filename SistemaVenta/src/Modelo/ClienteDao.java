@@ -18,7 +18,30 @@ public class ClienteDao {
     ResultSet rs;
     
     public boolean RegistrarCliente(Cliente c1){
-        
+        String sql = "INSERT INTO clientes (dni, nombre, telefono, direccion, razon) VALUES (?,?,?,?,?)";
+        try{
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, c1.getDni());
+            ps.setString(2, c1.getNombre());
+            ps.setInt(3, c1.getTelefono());
+            ps.setString(4, c1.getDireccion());
+            ps.setString(5, c1.getRazon());
+            ps.execute();
+            return true;
+    
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+            return false;
+        }finally{
+            try{
+                con.close();
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+    }
+    
     public List ListarCliente(){
             List<Cliente> ListaCl = new ArrayList();
             String sql = "SELECT * FROM clientes"; 
@@ -41,9 +64,9 @@ public class ClienteDao {
         }
         return ListaCl;
     }
-    
-    public boolean EliminarCliente(int id){
-        String sql = "DELETE FROM clientes WHERE id = ?";_
+
+     public boolean EliminarCliente(int id){
+        String sql = "DELETE FROM clientes WHERE id = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);

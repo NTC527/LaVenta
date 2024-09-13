@@ -9,6 +9,7 @@ import Modelo.Cliente;
 import Modelo.ClienteDao;
 import java.awt.List;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +23,7 @@ public class Sistema extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     public Sistema() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }   
     public void ListarCliente(){
         List<Cliente> ListarCl = client.ListarCliente();
@@ -954,7 +956,19 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
         // TODO add your handling code here:
-        if(!"".equ)
+        if(!"".equals(txtIdCliente.getText())){
+            int pregunta = JOptionPane.showConfirmDialog(null,"Esta seguro de eliminar");
+            if (pregunta == 0){
+                int id = Integer.parseInt(txtIdCliente.getText());
+                client.EliminarCliente(id);
+                LimpiarTable();
+                ListarCliente();
+                ListarCliente();
+                JOptionPane.showMessageDialog(null, "Cliente Registrado");
+            }else{
+                JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+            }
+        }
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
     
     /**
@@ -1102,4 +1116,11 @@ public class Sistema extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefonoCliente;
     private javax.swing.JTextField txtTelefonoproveedor;
     // End of variables declaration//GEN-END:variables
+    private void LimpiarCliente(){
+        txtIdCliente.setText("");
+        txtDniCliente.setText("");
+        txtNombreCliente.setText("");
+        txtTelefonoCliente.setText("");
+        txtIdCliente.setText("");
+    }
 }
